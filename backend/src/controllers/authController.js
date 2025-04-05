@@ -63,6 +63,14 @@ const authController = {
       res.status(500).json({ message: "Erro no servidor ao fazer login." })
     }
   },
+  getProfile: async (req, res) => {
+    try {
+      const user = req.user; // vindo do middleware de autenticação
+      res.status(200).json({ user });
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar perfil", error });
+    }
+  },
 }
 
 module.exports = authController
