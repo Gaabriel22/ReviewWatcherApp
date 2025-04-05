@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: require("path").resolve(__dirname, "../.env"),
+})
 const express = require("express")
 const cors = require("cors")
 const helmet = require("helmet")
@@ -6,7 +9,6 @@ const errorHandler = require("./middleware/errorHandler")
 const authMiddleware = require("./middleware/authMiddleware")
 const swaggerUi = require("swagger-ui-express")
 const swaggerDocument = require("./swagger.json")
-require("dotenv").config()
 
 // Conexão com o banco
 require("./config/db")
