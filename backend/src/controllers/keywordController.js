@@ -9,12 +9,10 @@ const keywordController = {
       const newKeyword = new Keyword({ word, user: userId })
       await newKeyword.save()
 
-      res
-        .status(201)
-        .json({
-          message: "Palavra-chave adicionada com sucesso.",
-          keyword: newKeyword,
-        })
+      res.status(201).json({
+        message: "Palavra-chave adicionada com sucesso.",
+        keyword: newKeyword,
+      })
     } catch (error) {
       console.error("Erro ao adicionar palavra-chave:", error)
       res
@@ -23,17 +21,13 @@ const keywordController = {
     }
   },
 
-  getKeywords: async (req, res) => {
+  getUserKeywords: async (req, res) => {
     try {
-      const userId = req.user.userId
+      const userId = req.user.id
       const keywords = await Keyword.find({ user: userId })
-
-      res.status(200).json({ keywords })
+      res.status(200).json(keywords)
     } catch (error) {
-      console.error("Erro ao buscar palavras-chave:", error)
-      res
-        .status(500)
-        .json({ message: "Erro interno ao buscar palavras-chave." })
+      res.status(500).json({ message: "Erro ao buscar palavras-chave", error })
     }
   },
 
