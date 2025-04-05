@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const telegramController = require('../controllers/telegramController');
+const express = require("express")
+const router = express.Router()
+const telegramController = require("../controllers/telegramController")
+const authMiddleware = require("../middleware/authMiddleware")
 
-// Webhook do Telegram
-router.post('/webhook', telegramController.handleTelegramWebhook);
+// Rota para setar o ID do Telegram do usuário autenticado
+router.post("/set", authMiddleware, telegramController.setTelegramId)
 
-module.exports = router;
+// Rota para obter o ID do Telegram do usuário autenticado
+router.get("/get", authMiddleware, telegramController.getTelegramId)
+
+module.exports = router
