@@ -1,1 +1,15 @@
-// Rotas de autenticaÁ„o
+const express = require("express")
+const router = express.Router()
+const authController = require("../controllers/authController")
+const authMiddleware = require("../middleware/authMiddleware")
+
+// Rota de registro de usu√°rio
+router.post("/register", authController.register)
+
+// Rota de login de usu√°rio
+router.post("/login", authController.login)
+
+// Rota protegida para obter dados do usu√°rio autenticado
+router.get("/me", authMiddleware, authController.getProfile)
+
+module.exports = router
