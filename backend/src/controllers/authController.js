@@ -1,4 +1,3 @@
-const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 
@@ -14,8 +13,8 @@ const authController = {
           .json({ message: "Usuário já registrado com este e-mail." })
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10)
-      const newUser = new User({ name, email, password: hashedPassword })
+      // O hash será feito automaticamente pelo middleware pre("save") no model
+      const newUser = new User({ name, email, password })
       await newUser.save()
 
       return res
@@ -38,7 +37,7 @@ const authController = {
         return res.status(401).json({ message: "Credenciais inválidas." })
       }
 
-      const isMatch = await bcrypt.compare(password, user.password)
+      const isMatch = await user.comparePassword(password)
       if (!isMatch) {
         return res.status(401).json({ message: "Credenciais inválidas." })
       }
@@ -63,12 +62,13 @@ const authController = {
       res.status(500).json({ message: "Erro no servidor ao fazer login." })
     }
   },
+
   getProfile: async (req, res) => {
     try {
-      const user = req.user; // vindo do middleware de autenticação
-      res.status(200).json({ user });
+      const user = req.user // vindo do middleware de autenticação
+      res.status(200).json({ user })
     } catch (error) {
-      res.status(500).json({ message: "Erro ao buscar perfil", error });
+      res.status(500).json({ message: "Erro ao buscar perfil", error })
     }
   },
 }
