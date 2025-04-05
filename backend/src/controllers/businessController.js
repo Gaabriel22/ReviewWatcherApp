@@ -15,12 +15,10 @@ const businessController = {
 
       await newBusiness.save()
 
-      res
-        .status(201)
-        .json({
-          message: "Estabelecimento criado com sucesso.",
-          business: newBusiness,
-        })
+      res.status(201).json({
+        message: "Estabelecimento criado com sucesso.",
+        business: newBusiness,
+      })
     } catch (error) {
       console.error("Erro ao criar estabelecimento:", error)
       res
@@ -42,6 +40,36 @@ const businessController = {
     }
   },
 
+  // Buscar empresa por ID
+  getBusinessById: async (req, res) => {
+    try {
+      const business = await Business.findById(req.params.id)
+      if (!business) {
+        return res.status(404).json({ message: "Empresa não encontrada" })
+      }
+      res.status(200).json(business)
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar empresa", error })
+    }
+  },
+
+  // Atualizar empresa por ID
+  updateBusiness: async (req, res) => {
+    try {
+      const updatedBusiness = await Business.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+      )
+      if (!updatedBusiness) {
+        return res.status(404).json({ message: "Empresa não encontrada" })
+      }
+      res.status(200).json(updatedBusiness)
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao atualizar empresa", error })
+    }
+  },
+
   deleteBusiness: async (req, res) => {
     try {
       const businessId = req.params.id
@@ -53,11 +81,9 @@ const businessController = {
       })
 
       if (!deleted) {
-        return res
-          .status(404)
-          .json({
-            message: "Estabelecimento não encontrado ou não autorizado.",
-          })
+        return res.status(404).json({
+          message: "Estabelecimento não encontrado ou não autorizado.",
+        })
       }
 
       res.status(200).json({ message: "Estabelecimento removido com sucesso." })
