@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard"
 import Settings from "./pages/Settings"
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
+import PrivateRoute from "./components/PrivateRoute"
 
 export default function AppRoutes() {
   return (
@@ -15,8 +16,22 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/Settings" element={<Settings />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

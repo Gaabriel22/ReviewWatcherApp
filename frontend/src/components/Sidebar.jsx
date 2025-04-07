@@ -3,8 +3,8 @@ import { Home, Settings, LogOut } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
 
 const navItems = [
-  { to: "/Dashboard", label: "Dashboard", icon: <Home size={20} /> },
-  { to: "/Settings", label: "Configurações", icon: <Settings size={20} /> },
+  { to: "/dashboard", label: "Dashboard", icon: <Home size={20} /> },
+  { to: "/settings", label: "Configurações", icon: <Settings size={20} /> },
 ]
 
 export default function Sidebar() {
