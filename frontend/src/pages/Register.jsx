@@ -22,12 +22,21 @@ export default function Register() {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-[#F3F4F6] px-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+        <div className="flex justify-center mb-6">
+          <img
+            src="../../assets/ReviewWatcherApp.png"
+            alt="ReviewWatcher Logo"
+            className="h-12"
+          />
+        </div>
+        <h2 className="text-2xl font-bold text-center text-[#374151] mb-6">
           Criar Conta
         </h2>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        {error && (
+          <p className="text-[#F43F5E] text-sm text-center mb-4">{error}</p>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -35,7 +44,7 @@ export default function Register() {
             placeholder="Nome"
             value={form.name}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0284C7]"
             required
           />
           <input
@@ -44,7 +53,7 @@ export default function Register() {
             placeholder="E-mail"
             value={form.email}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0284C7]"
             required
           />
           <input
@@ -53,19 +62,22 @@ export default function Register() {
             placeholder="Senha"
             value={form.password}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0284C7]"
             required
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-[#0284C7] text-white py-3 rounded-xl font-semibold hover:bg-[#0369a1] transition"
           >
             Registrar
           </button>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
+        <p className="mt-4 text-center text-sm text-[#374151]">
           Já tem uma conta?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
+          <a
+            href="/login"
+            className="text-[#0284C7] hover:underline font-medium"
+          >
             Entrar
           </a>
         </p>
