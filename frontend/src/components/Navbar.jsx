@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-      <Link to="/" className="text-xl font-bold text-blue-600">
+      <Link to="/dashboard" className="text-xl font-bold text-blue-600">
         ReviewWatcher
       </Link>
 
