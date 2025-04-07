@@ -16,7 +16,7 @@ export default function Login() {
     try {
       const res = await loginUser({ email, password })
       login(res.token)
-      navigate("/")
+      navigate("/dashboard")
     } catch (err) {
       setError("Credenciais inválidas")
     }
@@ -29,7 +29,7 @@ export default function Login() {
         <div className="flex justify-center mb-6">
           <img
             src="../../assets/ReviewWatcherApp.png"
-            alt="Logo"
+            alt="ReviewWatcher Logo"
             className="h-12"
           />
         </div>
