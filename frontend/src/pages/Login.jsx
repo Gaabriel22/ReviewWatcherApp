@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 import { loginUser } from "../api/authApi"
 
 export default function Login() {
@@ -7,62 +8,79 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const navigate = useNavigate()
+  const { login } = useAuth()
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setError("")
     try {
-      const response = await loginUser({ email, password })
-      localStorage.setItem("token", response.token)
-      navigate("/dashboard")
+      const res = await loginUser({ email, password })
+      login(res.token)
+      navigate("/")
     } catch (err) {
-      setError(err.response?.data?.message || "Erro ao fazer login.")
+      setError("Credenciais inválidas")
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Entrar na conta
+    <div className="min-h-screen flex items-center justify-center bg-[#F3F4F6] px-4">
+      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8">
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
+          <img
+            src="../../assets/ReviewWatcherApp.png"
+            alt="Logo"
+            className="h-12"
+          />
+        </div>
+
+        <h2 className="text-2xl font-bold text-center text-[#374151] mb-6">
+          Acesse sua conta
         </h2>
+
         {error && (
-          <div className="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded">
-            {error}
-          </div>
+          <p className="text-[#F43F5E] text-sm text-center mb-4">{error}</p>
         )}
-        <form onSubmit={handleLogin} className="space-y-4">
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-600 text-sm mb-1">Email</label>
+            <label className="block text-sm text-[#374151] mb-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0284C7]"
               placeholder="seu@email.com"
+              required
             />
           </div>
+
           <div>
-            <label className="block text-gray-600 text-sm mb-1">Senha</label>
+            <label className="block text-sm text-[#374151] mb-1">Senha</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0284C7]"
               placeholder="••••••••"
+              required
             />
           </div>
+
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full py-2 rounded-xl bg-[#0284C7] text-white font-semibold hover:bg-[#0369a1] transition"
           >
             Entrar
           </button>
         </form>
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Ainda não tem uma conta?{" "}
-          <a href="/register" className="text-blue-600 hover:underline">
+
+        <p className="text-sm text-center mt-6 text-[#374151]">
+          Não tem uma conta?{" "}
+          <a
+            href="/register"
+            className="text-[#0284C7] font-medium hover:underline"
+          >
             Cadastre-se
           </a>
         </p>
