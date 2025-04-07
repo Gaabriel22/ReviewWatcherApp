@@ -2,9 +2,12 @@ import Sidebar from "../components/Sidebar"
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-[#F3F4F6] p-6">
+    <div className="min-h-screen bg-[#F3F4F6] flex">
+      {/* Sidebar ao lado esquerdo */}
       <Sidebar />
-      <div className="max-w-7xl mx-auto">
+
+      {/* Conteúdo principal */}
+      <div className="flex-1 p-6">
         <h1 className="text-3xl font-bold text-[#374151] mb-6">
           Painel de Controle
         </h1>
