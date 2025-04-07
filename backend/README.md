@@ -52,8 +52,8 @@ src/
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/reviewwatcher-backend.git
-cd reviewwatcher-backend
+git clone https://github.com/Gaabriel22/ReviewWatcherApp
+cd backend
 ```
 
 ### 2. Instalar dependências
