@@ -12,7 +12,7 @@ export default function NotFound() {
           A página que você está procurando não existe ou foi movida.
         </p>
         <Link
-          to="/"
+          to="/Dashboard"
           className="inline-block bg-[#0284C7] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#0369a1] transition"
         >
           Voltar ao início

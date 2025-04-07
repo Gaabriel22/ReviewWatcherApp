@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { Home, Settings, LogOut } from "lucide-react"
 
 const navItems = [
-  { to: "/", label: "Dashboard", icon: <Home size={20} /> },
+  { to: "/Dashboard", label: "Dashboard", icon: <Home size={20} /> },
   { to: "/settings", label: "Configurações", icon: <Settings size={20} /> },
 ]
 
