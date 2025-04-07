@@ -1,26 +1,49 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
 export default function Navbar() {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate("/login")
+  }
+
   return (
-    <header className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold text-indigo-600">
+    <nav className="bg-white shadow-md p-4 flex justify-between items-center">
+      <Link to="/" className="text-xl font-bold text-blue-600">
         ReviewWatcher
       </Link>
 
-      <nav className="space-x-4">
-        <Link
-          to="/login"
-          className="text-gray-700 hover:text-indigo-600 transition-colors"
-        >
-          Login
-        </Link>
-        <Link
-          to="/register"
-          className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition-colors"
-        >
-          Criar Conta
-        </Link>
-      </nav>
-    </header>
+      <div className="flex items-center gap-4">
+        {!user ? (
+          <>
+            <Link
+              to="/login"
+              className="text-gray-700 hover:text-blue-600 transition"
+            >
+              Login
+            </Link>
+            <Link
+              to="/register"
+              className="text-gray-700 hover:text-blue-600 transition"
+            >
+              Registrar
+            </Link>
+          </>
+        ) : (
+          <>
+            <span className="text-gray-700">Olá, {user.name}!</span>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+            >
+              Sair
+            </button>
+          </>
+        )}
+      </div>
+    </nav>
   )
 }
