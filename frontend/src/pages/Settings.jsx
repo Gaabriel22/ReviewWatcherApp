@@ -1,22 +1,40 @@
-import { useEffect } from "react"
-
 export default function Settings() {
-  useEffect(() => {
-    document.title = "Configurações | ReviewWatcher"
-  }, [])
-
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Configurações</h1>
-      <p className="text-gray-600">
-        Em breve você poderá editar suas preferências de notificação,
-        informações da conta e outras opções.
-      </p>
+    <div className="min-h-screen bg-[#F3F4F6] p-6">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-[#374151] mb-6">
+          Configurações
+        </h2>
 
-      <div className="mt-6 p-4 border border-gray-300 rounded-lg bg-white shadow-sm">
-        <p className="text-gray-500 italic">
-          Área de configurações ainda em desenvolvimento...
-        </p>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold text-[#374151] mb-2">
+              Perfil
+            </h3>
+            <p className="text-[#6B7280]">
+              Em breve você poderá editar suas informações pessoais.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-[#374151] mb-2">
+              Preferências
+            </h3>
+            <p className="text-[#6B7280]">
+              Aqui você poderá ajustar preferências de notificação e temas.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-[#374151] mb-2">
+              Segurança
+            </h3>
+            <p className="text-[#6B7280]">
+              Em breve será possível alterar sua senha ou gerenciar
+              dispositivos.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
